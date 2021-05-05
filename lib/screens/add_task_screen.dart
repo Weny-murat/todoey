@@ -36,7 +36,9 @@ class AddTaskScreen extends StatelessWidget {
           child: MaterialButton(
             height: 40,
             minWidth: double.maxFinite,
-            onPressed: () {},
+            onPressed: () {
+              //TODO: add task functionality
+            },
             color: Colors.lightBlueAccent,
             child: Text(
               'Add',
