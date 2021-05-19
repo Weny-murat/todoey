@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
-class AddTaskScreen extends StatelessWidget {
-  const AddTaskScreen({
-    Key? key,
-  }) : super(key: key);
+class AddTaskScreen extends StatefulWidget {
+  final Function addTask;
+  AddTaskScreen(this.addTask);
+  @override
+  _AddTaskScreenState createState() => _AddTaskScreenState();
+}
+
+class _AddTaskScreenState extends State<AddTaskScreen> {
+  String taskString = '';
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +27,10 @@ class AddTaskScreen extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 25),
           child: TextField(
+            autofocus: true,
+            onChanged: (newValue) {
+              taskString = newValue;
+            },
             decoration: InputDecoration(
               isDense: true,
               contentPadding: EdgeInsets.all(2),
@@ -37,7 +46,8 @@ class AddTaskScreen extends StatelessWidget {
             height: 40,
             minWidth: double.maxFinite,
             onPressed: () {
-              //TODO: add task functionality
+              widget.addTask(taskString);
+              Navigator.pop(context);
             },
             color: Colors.lightBlueAccent,
             child: Text(

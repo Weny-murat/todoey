@@ -2,8 +2,22 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:todoey/widgets/task_list.dart';
 import 'package:todoey/screens/add_task_screen.dart';
+import 'package:todoey/models/task.dart';
 
-class TaskScreen extends StatelessWidget {
+class TaskScreen extends StatefulWidget {
+  @override
+  _TaskScreenState createState() => _TaskScreenState();
+}
+
+class _TaskScreenState extends State<TaskScreen> {
+  List<Task> tasks = [Task(name: 'Yumurta Al')];
+
+  void addTask(String taskString) {
+    setState(() {
+      tasks.add(Task(name: taskString));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +31,7 @@ class TaskScreen extends StatelessWidget {
                   child: Container(
                     padding: EdgeInsets.only(
                         bottom: MediaQuery.of(context).viewInsets.bottom),
-                    child: AddTaskScreen(),
+                    child: AddTaskScreen(addTask),
                   ),
                 );
               });
@@ -58,7 +72,7 @@ class TaskScreen extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '12 Tasks',
+                        '${tasks.length} Tasks',
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
@@ -81,7 +95,7 @@ class TaskScreen extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
-                  child: TaskListView(),
+                  child: TaskListView(tasks),
                 ),
               ),
             ),
