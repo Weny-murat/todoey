@@ -1,23 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:todoey/models/task_notifier.dart';
 import 'package:todoey/widgets/task_list.dart';
 import 'package:todoey/screens/add_task_screen.dart';
-import 'package:todoey/models/task.dart';
+import 'package:provider/provider.dart';
 
-class TaskScreen extends StatefulWidget {
-  @override
-  _TaskScreenState createState() => _TaskScreenState();
-}
-
-class _TaskScreenState extends State<TaskScreen> {
-  List<Task> tasks = [Task(name: 'Yumurta Al')];
-
-  void addTask(String taskString) {
-    setState(() {
-      tasks.add(Task(name: taskString));
-    });
-  }
-
+class TaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +19,7 @@ class _TaskScreenState extends State<TaskScreen> {
                   child: Container(
                     padding: EdgeInsets.only(
                         bottom: MediaQuery.of(context).viewInsets.bottom),
-                    child: AddTaskScreen(addTask),
+                    child: AddTaskScreen(),
                   ),
                 );
               });
@@ -71,13 +59,17 @@ class _TaskScreenState extends State<TaskScreen> {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      Text(
-                        '${tasks.length} Tasks',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 20,
-                        ),
+                      Consumer<TaskNotifier>(
+                        builder: (_, taskList, __) {
+                          return Text(
+                            '${taskList.tasks.length} Tasks',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 20,
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),
@@ -95,7 +87,11 @@ class _TaskScreenState extends State<TaskScreen> {
                 ),
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
-                  child: TaskListView(tasks),
+                  child: Consumer<TaskNotifier>(
+                    builder: (_, taskList, __) {
+                      return TaskListView(taskList.tasks);
+                    },
+                  ),
                 ),
               ),
             ),
