@@ -26,6 +26,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   provider: ^5.0.0
   equatable: ^2.0.3
+  shared_preferences: ^2.0.9
+  dartz: ^0.10.0
+  uuid: ^3.0.5
 
 dev_dependencies:
   flutter_test:
