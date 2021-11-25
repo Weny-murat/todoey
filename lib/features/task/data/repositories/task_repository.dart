@@ -14,16 +14,20 @@ class TaskRepository implements TaskRepositoryContract {
   TaskRepository({required this.localDataSource});
 
   @override
-  Future<Either<Failure, AddSuccess>> addTask(String name) async {
+  Future<Either<Failure, TodoTask>> addTask(String name) async {
     try {
       String id = uuid.v1();
-      TodoTaskModel tempTaskModel = TodoTaskModel(
+      TodoTaskModel newTask = TodoTaskModel(
         id: id,
         name: name,
         isDone: false,
       );
-      await localDataSource.addTaskToLocal(tempTaskModel);
-      return Right(AddSuccess());
+      await localDataSource.addTaskToLocal(newTask);
+      return Right(TodoTask(
+        id: newTask.id,
+        name: newTask.name,
+        isDone: newTask.isDone,
+      ));
     } catch (e) {
       return Left(CacheFailure());
     }
