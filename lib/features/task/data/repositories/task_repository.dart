@@ -55,4 +55,16 @@ class TaskRepository implements TaskRepositoryContract {
       return Left(CacheFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, UpdateSuccess>> updateTask(TodoTask task) async {
+    try {
+      await localDataSource.deleteTaskonLocal(task.id);
+      await localDataSource.addTaskToLocal(
+          TodoTaskModel(id: task.id, name: task.name, isDone: task.isDone));
+      return Right(UpdateSuccess());
+    } catch (e) {
+      return Left(CacheFailure());
+    }
+  }
 }
