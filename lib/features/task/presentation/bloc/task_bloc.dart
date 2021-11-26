@@ -11,6 +11,7 @@ class TaskBloc extends Bloc<TodoTaskEvent, TodoTaskListState> {
       : super(initialState) {
     on<LoadTasks>((event, emit) async {
       emit(TasksLoading());
+      await Future.delayed(Duration(seconds: 2), () {});
       var usecase = usecases.GetTaskList(repository);
       var result = await usecase(NoParams());
       result.fold(
@@ -35,6 +36,7 @@ class TaskBloc extends Bloc<TodoTaskEvent, TodoTaskListState> {
         },
       );
     });
+
     /*on<UpdateTask>((event, emit) {
       var usecase = usecases.(repository);
       var result = await usecase(AddTaskParams(event.taskName));
