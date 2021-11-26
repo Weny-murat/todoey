@@ -13,9 +13,10 @@ class TaskCountText extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<TaskBloc, TodoTaskListState>(builder: (context, state) {
       if (state is TasksLoaded) {
-        final count = state.tasks.length;
+        final totalTaskCount = state.tasks.length;
+        final incompleteTaskCount = state.tasks.where((e) => !e.isDone).length;
         return Text(
-          '$count Tasks',
+          '$incompleteTaskCount / $totalTaskCount Tasks',
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.w600,
