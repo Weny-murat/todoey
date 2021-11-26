@@ -7,5 +7,5 @@ abstract class TaskRepositoryContract {
   Future<Either<Failure, List<TodoTask>>> getTaskList();
   Future<Either<Failure, TodoTask>> addTask(String name);
   Future<Either<Failure, DeleteSuccess>> deleteTask(String taskId);
-  Future<Either<Failure, UpdateSuccess>> updateTask(TodoTask task);
+  Future<Either<Failure, TodoTask>> updateTask(TodoTask task);
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todoey/features/task/domain/entities/task.dart';
 import 'package:todoey/features/task/presentation/bloc/events.dart';
 import 'package:todoey/features/task/presentation/bloc/states.dart';
 import 'package:todoey/features/task/presentation/bloc/task_bloc.dart';
@@ -24,10 +25,16 @@ class TaskListView extends StatelessWidget {
           return (state.tasks.length > 0)
               ? ListView.builder(
                   itemBuilder: (context, index) {
+                    final currentTask = state.tasks[index];
                     return TaskTile(
-                      task: state.tasks[index],
+                      task: currentTask,
                       checkboxCallBack: (bool checkboxState) {
-                        //
+                        final updatedTask = TodoTask(
+                          id: currentTask.id,
+                          name: currentTask.name,
+                          isDone: checkboxState,
+                        );
+                        context.read<TaskBloc>().add(UpdateTask(updatedTask));
                       },
                     );
                   },

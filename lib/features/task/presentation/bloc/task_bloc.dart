@@ -37,19 +37,21 @@ class TaskBloc extends Bloc<TodoTaskEvent, TodoTaskListState> {
       );
     });
 
-    /*on<UpdateTask>((event, emit) {
-      var usecase = usecases.(repository);
-      var result = await usecase(AddTaskParams(event.taskName));
+    on<UpdateTask>((event, emit) async {
+      var usecase = usecases.UpdateTask(repository);
+      var result = await usecase(usecases.UpdateTaskParams(event.updatedTask));
       result.fold(
         (l) {
           emit(TasksNotLoaded());
         },
         (r) {
-          state.tasks.add(r);
+          final taskIndex =
+              state.tasks.indexWhere((e) => e.id == event.updatedTask.id);
+          state.tasks[taskIndex].isDone = event.updatedTask.isDone;
           emit(TasksLoaded(state.tasks));
         },
       );
-    });*/
+    });
     on<DeleteTask>((event, emit) async {
       var usecase = usecases.DeleteTask(repository);
       var result = await usecase(DeleteTaskParams(event.task.id));
