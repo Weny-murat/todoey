@@ -80,7 +80,7 @@ class TaskScreen extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
-                  child: TaskListView([]),
+                  child: TaskListView(),
                 ),
               ),
             ),
