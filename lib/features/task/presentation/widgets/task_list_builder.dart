@@ -20,6 +20,8 @@ class TaskListBuilder extends StatelessWidget {
         final currentTask = tasks[index];
         return TaskTile(
           task: currentTask,
+          // TODO: remove callback here
+          // instead,  add UpdateTask event inside the TaskTile widget
           checkboxCallBack: (bool checkboxState) {
             final updatedTask = TodoTask(
               id: currentTask.id,
