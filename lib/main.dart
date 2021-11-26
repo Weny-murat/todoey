@@ -1,26 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:todoey/models/task_notifier.dart';
-import 'package:todoey/screens/task_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todoey/features/task/presentation/bloc/task_bloc.dart';
+import 'package:todoey/features/task/presentation/screens/task_screen.dart';
+import 'service_locator.dart' as serviceLocator;
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  //init service locator
+  await serviceLocator.init();
   runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
+class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => TaskNotifier(),
+    return BlocProvider<TaskBloc>(
+      create: (BuildContext context) => serviceLocator.g<TaskBloc>(),
       child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: TaskScreen(),
-      ),
+          debugShowCheckedModeBanner: false,
+          home: TaskScreen()),
     );
   }
 }
