@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todoey/features/task/presentation/bloc/events.dart';
+import 'package:todoey/features/task/presentation/bloc/task_bloc.dart';
 
 class AddTaskScreen extends StatefulWidget {
   @override
@@ -44,6 +47,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             height: 40,
             minWidth: double.maxFinite,
             onPressed: () {
+              context.read<TaskBloc>().add(AddTask(taskString));
               Navigator.pop(context);
             },
             color: Colors.lightBlueAccent,

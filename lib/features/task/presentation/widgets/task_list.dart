@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todoey/features/task/domain/entities/task.dart';
 import 'package:todoey/features/task/presentation/bloc/events.dart';
 import 'package:todoey/features/task/presentation/bloc/states.dart';
 import 'package:todoey/features/task/presentation/bloc/task_bloc.dart';
