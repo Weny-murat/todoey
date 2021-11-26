@@ -1,9 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:todoey/models/task_notifier.dart';
-import 'package:todoey/widgets/task_list.dart';
-import 'package:todoey/screens/add_task_screen.dart';
-import 'package:provider/provider.dart';
+import 'package:todoey/features/task/presentation/widgets/add_task_screen.dart';
+import 'package:todoey/features/task/presentation/widgets/task_list.dart';
 
 class TaskScreen extends StatelessWidget {
   @override
@@ -59,17 +56,13 @@ class TaskScreen extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      Consumer<TaskNotifier>(
-                        builder: (_, taskList, __) {
-                          return Text(
-                            '${taskList.tasks.length} Tasks',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 20,
-                            ),
-                          );
-                        },
+                      Text(
+                        '\${taskList.tasks.length} Tasks',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 20,
+                        ),
                       ),
                     ],
                   ),
@@ -87,11 +80,7 @@ class TaskScreen extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
-                  child: Consumer<TaskNotifier>(
-                    builder: (_, taskList, __) {
-                      return TaskListView(taskList.tasks);
-                    },
-                  ),
+                  child: TaskListView([]),
                 ),
               ),
             ),
