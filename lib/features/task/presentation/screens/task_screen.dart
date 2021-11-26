@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todoey/features/task/presentation/widgets/add_task_screen.dart';
+import 'package:todoey/features/task/presentation/widgets/task_count_text.dart';
 import 'package:todoey/features/task/presentation/widgets/task_list.dart';
 
 class TaskScreen extends StatelessWidget {
@@ -56,14 +57,7 @@ class TaskScreen extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      Text(
-                        '\${taskList.tasks.length} Tasks',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 20,
-                        ),
-                      ),
+                      TaskCountText(),
                     ],
                   ),
                 ),
